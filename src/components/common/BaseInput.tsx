@@ -21,15 +21,21 @@ const BaseInput: FC<BaseInputProps> = ({ name, label, placeHolder, type }) => {
     placeholder: placeHolder!,
     status: ''
   };
+  const configsInputWrapper = {
+    status: ''
+  };
 
   if (meta && meta.error) {
     configInput.status = 'invalid';
+    configsInputWrapper.status = 'invalid';
   }
   if (meta && !meta.error) {
     configInput.status = 'valid';
+    configsInputWrapper.status = 'valid';
   }
   if (field.value === '') {
     configInput.status = '';
+    configsInputWrapper.status = '';
   }
 
   return (
@@ -40,17 +46,19 @@ const BaseInput: FC<BaseInputProps> = ({ name, label, placeHolder, type }) => {
         </BaseInputLabel>
       )}
 
-      <StyledInput {...configInput} />
-      {meta && meta.error && field.value !== '' && (
-        <div className="input-icons">
-          <BaseIconSvg iconName="error" width={24} height={24} />
-        </div>
-      )}
-      {meta && !meta.error && field.value !== '' ? (
-        <div className="input-icons">
-          <BaseIconSvg iconName="success" width={24} height={24} />
-        </div>
-      ) : null}
+      <StyledInputWrapper {...configsInputWrapper}>
+        <StyledInput {...configInput} />
+        {meta && meta.error && field.value !== '' && (
+          <div className="input-icons">
+            <BaseIconSvg iconName="error" width={24} height={24} />
+          </div>
+        )}
+        {meta && !meta.error && field.value !== '' ? (
+          <div className="input-icons">
+            <BaseIconSvg iconName="success" width={24} height={24} />
+          </div>
+        ) : null}
+      </StyledInputWrapper>
 
       {meta && meta.error && field.value !== '' && <BaseText type="small">{meta.error}</BaseText>}
     </BaseInputWrapper>
@@ -78,6 +86,26 @@ export const BaseInputWrapper = styled.div`
   }
 `;
 
+export const StyledInputWrapper = styled.div<{ status: string }>`
+  position: relative;
+  ${({ status }) => {
+    return (
+      status === 'invalid' &&
+      css`
+        & ~ p {
+          margin-top: 5px;
+          color: ${({ theme }) => theme.colors.red};
+          padding: 0px 10px;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          width: 100%;
+        }
+      `
+    );
+  }}
+`;
+
 export const StyledInput = styled.input<{ status: string }>`
   border: 1px solid var(--gray);
   border-radius: 5px;
@@ -91,15 +119,6 @@ export const StyledInput = styled.input<{ status: string }>`
         return css`
           background-color: ${({ theme }) => theme.colors.redPallet1};
           border: 1px solid ${({ theme }) => theme.colors.red};
-          & ~ p {
-            margin-top: 5px;
-            color: ${({ theme }) => theme.colors.red};
-            padding: 0px 10px;
-            position: absolute;
-            left: 0;
-            top: 100%;
-            width: 100%;
-          }
         `;
       case 'valid':
         return css`
@@ -116,7 +135,9 @@ export const StyledInput = styled.input<{ status: string }>`
 `;
 
 export const BaseInputLabel = styled.label`
-  margin-bottom: 12px;
+  display: inline-block;
+  margin-bottom: 6px;
+  cursor: pointer;
 `;
 
 export default memo(BaseInput);

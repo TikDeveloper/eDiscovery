@@ -15,10 +15,6 @@ const SignUpPage = lazy(
   () => import(/* webpackChunkName: "Sign-Up-Page" */ 'pages/sign-up/SignUpPage')
 );
 
-const ResetPasswordPage = lazy(
-  () => import(/* webpackChunkName: "Sign-Up-Page" */ 'pages/reset-password/ResetPasswordPage')
-);
-
 const NotFoundPage = lazy(() => import(/* webpackChunkName: "404-Page" */ 'pages/404/404'));
 
 //***********  User Pages ***********//
@@ -56,14 +52,6 @@ const AnimatedRoutes = () => {
             element={
               <RestrictedRoute isAuth={isLoggedIn}>
                 <SignUpPage />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/reset-password"
-            element={
-              <RestrictedRoute isAuth={isLoggedIn}>
-                <ResetPasswordPage />
               </RestrictedRoute>
             }
           />

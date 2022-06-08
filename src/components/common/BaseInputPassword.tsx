@@ -2,7 +2,13 @@ import { FC, memo, useCallback, useState } from 'react';
 import { useField } from 'formik';
 import BaseText from './BaseText';
 import BaseIconSvg from './BaseIconSvg';
-import { BaseInputLabel, BaseInputProps, BaseInputWrapper, StyledInput } from './BaseInput';
+import {
+  BaseInputLabel,
+  BaseInputProps,
+  BaseInputWrapper,
+  StyledInput,
+  StyledInputWrapper
+} from './BaseInput';
 
 const BaseInput: FC<BaseInputProps> = ({ name, label, placeHolder, type }) => {
   const [inputType, setInputType] = useState(type);
@@ -16,15 +22,21 @@ const BaseInput: FC<BaseInputProps> = ({ name, label, placeHolder, type }) => {
     placeholder: placeHolder!,
     status: ''
   };
+  const configInputWrapper = {
+    status: ''
+  };
 
   if (meta && meta.error) {
     configInput.status = 'invalid';
+    configInputWrapper.status = 'invalid';
   }
   if (meta && !meta.error) {
     configInput.status = 'valid';
+    configInputWrapper.status = 'valid';
   }
   if (field.value === '') {
     configInput.status = '';
+    configInputWrapper.status = '';
   }
   const togglePassInputType = useCallback(() => {
     setInputType((prev) => {
@@ -42,25 +54,27 @@ const BaseInput: FC<BaseInputProps> = ({ name, label, placeHolder, type }) => {
           <BaseText>{label}</BaseText>
         </BaseInputLabel>
       )}
-      <StyledInput {...configInput} />
 
-      <div className="input-icons">
-        <button type="button" onClick={() => togglePassInputType()}>
-          {inputType === 'password' ? (
-            <BaseIconSvg iconName="lenseShow" width={24} height={24} />
-          ) : (
-            <BaseIconSvg iconName="lenseHide" width={24} height={24} />
+      <StyledInputWrapper {...configInputWrapper}>
+        <StyledInput {...configInput} />
+
+        <div className="input-icons">
+          <button type="button" onClick={() => togglePassInputType()}>
+            {inputType === 'password' ? (
+              <BaseIconSvg iconName="lenseShow" width={24} height={24} />
+            ) : (
+              <BaseIconSvg iconName="lenseHide" width={24} height={24} />
+            )}
+          </button>
+
+          {meta && meta.error && field.value !== '' && (
+            <BaseIconSvg iconName="error" width={24} height={24} />
           )}
-        </button>
-
-        {meta && meta.error && field.value !== '' && (
-          <BaseIconSvg iconName="error" width={24} height={24} />
-        )}
-        {meta && !meta.error && field.value !== '' ? (
-          <BaseIconSvg iconName="success" width={24} height={24} />
-        ) : null}
-      </div>
-
+          {meta && !meta.error && field.value !== '' ? (
+            <BaseIconSvg iconName="success" width={24} height={24} />
+          ) : null}
+        </div>
+      </StyledInputWrapper>
       {meta && meta.error && field.value !== '' && <BaseText type="small">{meta.error}</BaseText>}
     </BaseInputWrapper>
   );

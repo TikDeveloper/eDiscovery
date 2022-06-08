@@ -1,74 +1,55 @@
 import styled from 'styled-components';
-import { device } from 'styles/breakpoints';
 
 export const SignInFormWrapper = styled.div`
-  h2 {
-    font-size: 48px;
-    line-height: 72px;
-    font-weight: 600;
-    margin-bottom: 40px;
+  display: flex;
+  width: 1024px;
+  height: 60%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+`;
+
+export const SignInFormInfo = styled.div`
+  width: 40%;
+  background-color: ${({ theme }) => theme.colors.blue};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px;
+  a,
+  p {
+    color: ${({ theme }) => theme.colors.white};
+  }
+  .sign-in-info {
     text-align: center;
-    color: ${({ theme }) => theme.colors.blue};
-  }
-  .sign-in-form {
-    width: 390px;
-    &-submit {
-      margin-top: 48px;
+
+    a {
+      text-decoration: underline;
+    }
+    &-terms {
+      margin-top: 24px;
     }
   }
-  @media ${device.mobile} {
-    .sign-in-form {
-      width: 100%;
-    }
+`;
+
+export const SignInFormContainer = styled.div`
+  width: 60%;
+  padding: 64px 48px;
+  background-color: ${({ theme }) => theme.colors.white};
+  overflow-y: auto;
+  > p {
+    margin-bottom: 16px;
+  }
+  .sign-in-form-submit {
+    margin-top: 32px;
   }
 `;
 
 export const SignInFormActions = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 36px;
-  > button {
-    cursor: pointer;
-    > p {
-      font-size: 14px;
-      color: ${({ theme }) => theme.colors.blue};
-      font-weight: 500;
-    }
-  }
-`;
-
-export const SignInFormModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  > p:nth-child(1) {
-    margin: 12px 0;
-    text-align: center;
-    @media ${device.tablet} {
-      display: none;
-    }
-  }
-  > p:nth-child(2) {
-    color: ${({ theme }) => theme.colors.blue};
-    max-width: 80%;
-    text-align: center;
-    margin: 0 auto;
-    line-height: 32px;
-    margin-top: 12px;
-    @media ${device.tablet} {
-      margin-top: 32px;
-      max-width: 100%;
-    }
-  }
-  > form {
-    width: 100%;
-    max-width: 390px;
-    margin-top: 36px;
-    .forgot-form-submit {
-      margin-top: 24px;
-    }
-    @media ${device.tablet} {
-      margin-top: 24px;
-    }
+  margin-top: 32px;
+  > a > p {
+    color: #1a0dab;
   }
 `;

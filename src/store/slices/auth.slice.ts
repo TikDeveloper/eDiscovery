@@ -18,13 +18,18 @@ type AuthStateType = {
 export type LoginRequestArgs = {
   email: string;
   password: string;
+  rememberMe: boolean;
 };
 
 export type RegisterRequestArgs = {
+  email: string;
   firstName: string;
   lastName: string;
-  email: string;
+  country: string;
+  phone: string;
   password: string;
+  company: string;
+  terms: boolean;
 };
 
 export type ResetPasswordArgs = {
@@ -47,14 +52,11 @@ const initialState: AuthStateType = {
 export const loginRequest = createAsyncThunk(
   'auth/login',
   async (args: LoginRequestArgs, { rejectWithValue }) => {
-    const formData = new FormData();
-    formData.append('email', args.email);
-    formData.append('password', args.password);
     try {
-      const response = await api.post('/login/', formData);
+      const response = await api.post('/login/', args);
       const { accses_token } = response.data;
       api.defaults.headers.common['Authorization'] = `Bearer ${accses_token}`;
-      toast.success('Բարի գալուստ Gurubook');
+      toast.success('Successfully logged in...!');
 
       return response.data;
     } catch (err: any) {
@@ -68,16 +70,11 @@ export const loginRequest = createAsyncThunk(
 export const registerRequest = createAsyncThunk(
   'auth/register',
   async (args: RegisterRequestArgs, { rejectWithValue }) => {
-    const formData = new FormData();
-    formData.append('first_name', args.firstName);
-    formData.append('last_name', args.lastName);
-    formData.append('email', args.email);
-    formData.append('password', args.password);
     try {
-      const response = await api.post('/register/', formData);
+      const response = await api.post('/register/', args);
       const { accses_token } = response.data;
       api.defaults.headers.common['Authorization'] = `Bearer ${accses_token}`;
-      toast.success('Ձեր անձնական հաշիվը հաջողությամբ ստեղծվել է');
+      toast.success('Successfully done Registration..!');
 
       return response.data;
     } catch (err: any) {
@@ -88,47 +85,44 @@ export const registerRequest = createAsyncThunk(
 );
 
 // Reset Password Request //
-export const resetPasswordRequest = createAsyncThunk(
-  'auth/resetPassword',
-  async (args: ResetPasswordArgs, { rejectWithValue }) => {
-    const formData = new FormData();
-    formData.append('email', args.email);
-    try {
-      const response = await api.post('/forgot_password/', formData);
+// export const resetPasswordRequest = createAsyncThunk(
+//   'auth/resetPassword',
+//   async (args: ResetPasswordArgs, { rejectWithValue }) => {
+//     const formData = new FormData();
+//     formData.append('email', args.email);
+//     try {
+//       const response = await api.post('/forgot_password/', formData);
 
-      return response.data;
-    } catch (err: any) {
-      toast.error(err.response.data.error);
-      return rejectWithValue(err.response.data);
-    }
-  }
-);
+//       return response.data;
+//     } catch (err: any) {
+//       toast.error(err.response.data.error);
+//       return rejectWithValue(err.response.data);
+//     }
+//   }
+// );
 
 // Set New Password Request //
-export const setNewPasswordRequest = createAsyncThunk(
-  'auth/setNewPassword',
-  async (args: SetNewPasswordArgs, { rejectWithValue }) => {
-    const formData = new FormData();
-    formData.append('new_password', args.newPassword);
-    formData.append('token', args.token);
-    try {
-      const response = await api.post('/forgot_password/new_password/', formData);
+// export const setNewPasswordRequest = createAsyncThunk(
+//   'auth/setNewPassword',
+//   async (args: SetNewPasswordArgs, { rejectWithValue }) => {
+//     const formData = new FormData();
+//     formData.append('new_password', args.newPassword);
+//     formData.append('token', args.token);
+//     try {
+//       const response = await api.post('/forgot_password/new_password/', formData);
 
-      return response.data;
-    } catch (err: any) {
-      toast.error(err.response.data.error);
-      return rejectWithValue(err.response.data);
-    }
-  }
-);
+//       return response.data;
+//     } catch (err: any) {
+//       toast.error(err.response.data.error);
+//       return rejectWithValue(err.response.data);
+//     }
+//   }
+// );
 
 const authSlice = createSlice({
   name: 'AuthSlice',
   initialState,
   reducers: {
-    testFakeLogin(state) {
-      state.isLoggedIn = true;
-    }
     // logout(state) {
     //   state.isLoggedIn = false;
     //   state.token = null;
@@ -176,35 +170,35 @@ const authSlice = createSlice({
       .addCase(registerRequest.rejected, (state) => {
         state.loading = false;
         // console.error(payload, 'Error Responce Registration');
-      })
-
-      // Reset Password //
-      .addCase(resetPasswordRequest.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(resetPasswordRequest.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(resetPasswordRequest.rejected, (state) => {
-        state.loading = false;
-        // console.error(payload, 'Error Responce Reset Password');
-      })
-
-      // Set New Password //
-      .addCase(setNewPasswordRequest.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(setNewPasswordRequest.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        console.log(payload);
-      })
-      .addCase(setNewPasswordRequest.rejected, (state) => {
-        state.loading = false;
-        // console.error(payload, 'Error Responce Set New Password');
       });
+
+    // Reset Password //
+    // .addCase(resetPasswordRequest.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(resetPasswordRequest.fulfilled, (state) => {
+    //   state.loading = false;
+    // })
+    // .addCase(resetPasswordRequest.rejected, (state) => {
+    //   state.loading = false;
+    //   // console.error(payload, 'Error Responce Reset Password');
+    // })
+
+    // Set New Password //
+    // .addCase(setNewPasswordRequest.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(setNewPasswordRequest.fulfilled, (state, { payload }) => {
+    //   state.loading = false;
+    //   console.log(payload);
+    // })
+    // .addCase(setNewPasswordRequest.rejected, (state) => {
+    //   state.loading = false;
+    //   // console.error(payload, 'Error Responce Set New Password');
+    // });
   }
 });
 
-export const { testFakeLogin } = authSlice.actions;
+// export const {  } = authSlice.actions;
 
 export default authSlice.reducer;

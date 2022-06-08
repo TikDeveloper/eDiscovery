@@ -36,7 +36,7 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
   }
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   /* Track */
   ::-webkit-scrollbar-track {
@@ -44,7 +44,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.bluePallet1};
+    background: ${({ theme }) => theme.colors.black};
     border-radius: 40px;
   }
   /* Handle on hover */

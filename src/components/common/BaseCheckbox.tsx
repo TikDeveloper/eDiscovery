@@ -29,7 +29,7 @@ const BaseCheckbox: FC<BaseCheckboxProps> = ({ name, label }) => {
       <input {...configCheckbox} />
       {label && (
         <BaseCheckboxLabel htmlFor={name}>
-          <BaseText type="small">{label}</BaseText>
+          <BaseText>{label}</BaseText>
         </BaseCheckboxLabel>
       )}
     </BaseCheckboxWrapper>
@@ -39,16 +39,15 @@ const BaseCheckbox: FC<BaseCheckboxProps> = ({ name, label }) => {
 const BaseCheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
+  > input {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const BaseCheckboxLabel = styled.label`
-  margin-left: 5px;
+  margin-left: 8px;
   cursor: pointer;
-  > p {
-    font-size: 14px;
-    color: ${({ theme }) => theme.colors.blue};
-    font-weight: 500;
-  }
 `;
 
 export default memo(BaseCheckbox);

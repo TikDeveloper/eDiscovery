@@ -35,7 +35,7 @@ export const SpinnerWrapper = styled.div<BaseSpinnerProps>`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: ${({ theme }) => theme.colors.blackPallet1};
+        background-color: ${({ theme }) => theme.colors.grayPallet1};
         > div {
           width: 48px;
           height: 48px;

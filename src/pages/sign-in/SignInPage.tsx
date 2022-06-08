@@ -1,11 +1,11 @@
 import { FC } from 'react';
-// import SignInForm from 'components/forms/sign-in-form/SignInForm';
 import GuestLayout from 'layouts/guest-layout/GuestLayout';
+import SignInForm from 'components/forms/sign-in-form/SignInForm';
 
 const SignInPage: FC = () => {
   return (
     <GuestLayout>
-      <div>SignIn Page</div>
+      <SignInForm />
     </GuestLayout>
   );
 };
