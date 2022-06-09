@@ -9,7 +9,7 @@ type RestrictedRouteProps = {
 };
 
 const RestrictedRoute: FC<RestrictedRouteProps> = ({ isAuth, children }) => {
-  if (isAuth) return <Navigate to="/dashboard" replace />;
+  if (isAuth) return <Navigate to="/" replace />;
   return (
     <motion.div variants={pageFadeAnimation} initial="initial" animate="animate" exit="exit">
       {children}

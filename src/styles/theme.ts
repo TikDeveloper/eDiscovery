@@ -50,7 +50,10 @@ export const theme = {
     greenPallet1: '#dff1dc',
 
     blue: '#2F4858',
-    bluePallet1: '#183241'
+    bluePallet1: '#183241',
+    bluePallet2: '#ECF2F8',
+    bluePallet3: '#EEF2F9',
+    bluePallet4: '#F9FAFD'
   },
 
   // ************* Media ************* //

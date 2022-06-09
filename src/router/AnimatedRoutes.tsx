@@ -22,6 +22,10 @@ const UserLayout = lazy(
   () => import(/* webpackChunkName: "User-Pages" */ 'layouts/user-layout/UserLayout')
 );
 
+const DashboardPage = lazy(
+  () => import(/* webpackChunkName: "Dashboard-Page" */ 'pages/dashboard/DashboardPage')
+);
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
@@ -64,9 +68,10 @@ const AnimatedRoutes = () => {
               </PrivateRoute>
             }
           >
-            {/* <Route index element={<DashboardPage />} /> */}
+            <Route index element={<DashboardPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
           </Route>
-          <Route path={'*'} element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AnimatePresence>
     </Suspense>

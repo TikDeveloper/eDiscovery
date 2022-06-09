@@ -52,7 +52,7 @@ const SignUpForm: FC = () => {
           onSubmit={onSubmitFormRegistration}
         >
           {({ dirty, isValid, isSubmitting }) => (
-            <Form>
+            <Form autoComplete="off">
               <BaseInput
                 name="email"
                 type="text"

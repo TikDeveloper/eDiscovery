@@ -65,7 +65,7 @@ const SignInForm: FC = () => {
           onSubmit={onSubmitFormLogin}
         >
           {({ dirty, isValid, isSubmitting }) => (
-            <Form>
+            <Form autoComplete="off">
               <BaseInput name="email" type="text" label="Email address" />
               <BaseInputPassword name="password" type="password" label="Password" />
 

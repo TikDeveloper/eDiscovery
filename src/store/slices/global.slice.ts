@@ -1,8 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export type GlobalState = {
-  isModalOpen: boolean;
-};
+import { GlobalState } from './global.types';
 
 const initialState: GlobalState = {
   isModalOpen: false
@@ -13,6 +10,6 @@ export const globalSlice = createSlice({
   initialState,
   reducers: {}
 });
-// export const {} = globalSlice.actions;
+// export const {  } = globalSlice.actions;
 
 export default globalSlice.reducer;

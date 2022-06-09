@@ -8,5 +8,5 @@ export const GuestLayoutWrapper = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.grayPallet1};
+  background-color: ${({ theme }) => theme.colors.bluePallet2};
 `;
