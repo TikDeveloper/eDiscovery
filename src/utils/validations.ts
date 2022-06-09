@@ -25,40 +25,6 @@ export const FORM_VALIDATION_SIGN_IN = Yup.object({
   rememberMe: Yup.boolean().oneOf([true, false], 'Error')
 });
 
-// // Forgot Password Form //
-// export type VALUES_FORGOT = {
-//   email: string;
-// };
-
-// export const INITIAL_VALUES_FORGOT: VALUES_FORGOT = {
-//   email: ''
-// };
-
-// export const FORM_VALIDATION_FORGOT = Yup.object({
-//   email: Yup.string().email('Անվավեր Էլ․ հասցե․․!').required('Այս դաշտը պարտադիր է․․!')
-// });
-
-// // Reset Password Form //
-// export type VALUES_RESET = {
-//   newPassword: string;
-//   newPasswordConfirmation: string;
-// };
-
-// export const INITIAL_VALUES_RESET: VALUES_RESET = {
-//   newPassword: '',
-//   newPasswordConfirmation: ''
-// };
-
-// export const FORM_VALIDATION_RESET = Yup.object({
-//   newPassword: Yup.string()
-//     .matches(passwordPattern, 'Գաղտնաբարը պետք է պարունակի մեկ A,մեկ a և 1 թիվ․․!')
-//     .min(6, 'Գաղտնաբարը պետք է պարունակի 6 նիշ')
-//     .required('Այս դաշտը պարտադիր է․․!'),
-//   newPasswordConfirmation: Yup.string()
-//     .oneOf([Yup.ref('newPassword'), null], 'Գաղտնաբառերը չեն համապատասխանում․․!')
-//     .required('Այս դաշտը պարտադիր է․․!')
-// });
-
 // Registration Form //
 export type VALUES_SIGN_UP = {
   email: string;
@@ -98,7 +64,7 @@ export const FORM_VALIDATION_SIGN_UP = Yup.object({
     .required('Required field..!'),
   password: Yup.string()
     .matches(passwordPattern, 'Password must contain (A-Z), (a-z), (0-9) stymbol..!')
-    .min(6, 'Password must contain 6 char..!')
+    .min(8, 'Password must contain 8 char..!')
     .required('Required field..!'),
   company: Yup.string(),
   terms: Yup.boolean().oneOf([true, null], 'Error')

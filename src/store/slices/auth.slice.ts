@@ -17,13 +17,13 @@ export const loginRequest = createAsyncThunk(
   async (args: LoginRequestArgs, { rejectWithValue }) => {
     try {
       const response = await api.post('/login/', args);
-      const { accses_token } = response.data;
-      api.defaults.headers.common['Authorization'] = `Bearer ${accses_token}`;
+      const { access } = response.data;
+      api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
       toast.success('Successfully logged in...!');
 
       return response.data;
     } catch (err: any) {
-      toast.error(err.response.data.error);
+      toast.error(err.response.data.detail);
       return rejectWithValue(err.response.data);
     }
   }
@@ -32,16 +32,23 @@ export const loginRequest = createAsyncThunk(
 // Registration Request //
 export const registerRequest = createAsyncThunk(
   'auth/register',
-  async (args: RegisterRequestArgs, { rejectWithValue, dispatch }) => {
-    dispatch(fakeLogin());
+  async (args: RegisterRequestArgs, { rejectWithValue }) => {
     try {
-      const response = await api.post('/register/', args);
-      const { accses_token } = response.data;
-      api.defaults.headers.common['Authorization'] = `Bearer ${accses_token}`;
+      const response = await api.post('/register/', {
+        email: args.email,
+        first_name: args.firstName,
+        last_name: args.lastName,
+        country: args.country,
+        phone: args.phone,
+        company_name: args.company,
+        password: args.password
+      });
+      const { accses } = response.data;
+      api.defaults.headers.common['Authorization'] = `Bearer ${accses}`;
       toast.success('Successfully done Registration..!');
       return response.data;
     } catch (err: any) {
-      toast.error(err.response.data.error);
+      toast.error(err.response.data.detail);
       return rejectWithValue(err.response.data);
     }
   }
@@ -71,14 +78,9 @@ const authSlice = createSlice({
       })
       .addCase(loginRequest.fulfilled, (state, { payload }) => {
         state.loading = false;
-        // state.isLoggedIn = true;
-        // state.token = payload.accses_token;
-        // state.data = {
-        //   firstName: payload.first_name,
-        //   lastName: payload.last_name,
-        //   email: payload.email
-        // };
-        console.error(payload, '>>>>>>>>>>> Login Payload');
+        state.isLoggedIn = true;
+        state.token = payload.access;
+        // console.error(payload, '>>>>>>>>>>> Login Payload');
       })
       .addCase(loginRequest.rejected, (state) => {
         state.loading = false;
@@ -91,14 +93,10 @@ const authSlice = createSlice({
       })
       .addCase(registerRequest.fulfilled, (state, { payload }) => {
         state.loading = false;
-        // state.isLoggedIn = true;
-        // state.token = payload.accses_token;
-        // state.data = {
-        //   firstName: payload.first_name,
-        //   lastName: payload.last_name,
-        //   email: payload.email
-        // };
-        console.error(payload, '>>>>>>>>>>> Register Payload');
+        state.isLoggedIn = true;
+        state.token = payload.access;
+
+        // console.error(payload, '>>>>>>>>>>> Register Payload');
       })
       .addCase(registerRequest.rejected, (state) => {
         state.loading = false;

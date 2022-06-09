@@ -26,6 +26,10 @@ const DashboardPage = lazy(
   () => import(/* webpackChunkName: "Dashboard-Page" */ 'pages/dashboard/DashboardPage')
 );
 
+const MatterPage = lazy(
+  () => import(/* webpackChunkName: "Matter-Page" */ 'pages/matter/MatterPage')
+);
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
@@ -54,7 +58,7 @@ const AnimatedRoutes = () => {
           <Route
             path="/sign-up"
             element={
-              <RestrictedRoute isAuth={isLoggedIn}>
+              <RestrictedRoute isAuth={isLoggedIn} forSignUp>
                 <SignUpPage />
               </RestrictedRoute>
             }
@@ -70,6 +74,7 @@ const AnimatedRoutes = () => {
           >
             <Route index element={<DashboardPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="add-matter" element={<MatterPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

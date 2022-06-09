@@ -42,15 +42,23 @@ export const MatterFormContainer = styled.div`
   }
   .step-item {
     pointer-events: none;
+    & ~ div > span {
+      color: ${({ theme }) => theme.colors.gray};
+    }
     &.completed,
     &.active {
-      background-color: ${({ theme }) => theme.colors.bluePallet1};
+      background-color: ${({ theme }) => theme.colors.bluePallet5};
       &:hover {
         background-color: ${({ theme }) => theme.colors.blue};
+      }
+      & ~ div > span {
+        color: ${({ theme }) => theme.colors.bluePallet5};
       }
     }
   }
 `;
+
+export const MatterTemplateWrapper = styled.div``;
 
 export const MatterFormTabs = styled.div`
   background-color: ${({ theme }) => theme.colors.bluePallet4};
@@ -63,7 +71,9 @@ export const MatterFormActions = styled.div`
   padding: 32px 56px;
   > button {
     width: 150px;
-
+    height: 40px;
+    background-color: ${({ theme }) => theme.colors.bluePallet5};
+    border: 2px solid ${({ theme }) => theme.colors.bluePallet5};
     &:not(:first-child) {
       margin-left: 48px;
     }

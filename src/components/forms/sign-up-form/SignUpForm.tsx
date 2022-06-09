@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useMemo } from 'react';
 import { SignUpFormContainer, SignUpFormInfo, SignUpFormWrapper } from './SignUpForm.styled';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { FORM_VALIDATION_SIGN_UP, INITIAL_VALUES_SIGN_UP, VALUES_SIGN_UP } from 'utils/validations';
@@ -10,16 +10,19 @@ import BaseText from 'components/common/BaseText';
 import { useAppDispatch } from 'hooks/useRedux';
 import { registerRequest } from 'store/slices/auth.slice';
 import BaseTitle from 'components/common/BaseTitle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BaseCheckbox from 'components/common/BaseCheckbox';
+import countryList from 'react-select-country-list';
 
 const SignUpForm: FC = () => {
   const dispatch = useAppDispatch();
-
+  const options = useMemo(() => countryList().getData(), []);
+  const navigate = useNavigate();
+  console.log(options);
   const onSubmitFormRegistration = useCallback(
     async (values: VALUES_SIGN_UP, actions: FormikHelpers<VALUES_SIGN_UP>) => {
-      console.log(values, 'Form Values');
       await dispatch(registerRequest(values));
+      navigate('/add-matter');
       actions.setSubmitting(false);
       actions.resetForm();
     },
@@ -64,6 +67,11 @@ const SignUpForm: FC = () => {
               </div>
               <BaseInput name="phone" type="text" label="Phone" />
               <BaseInput name="country" type="text" label="Country" />
+              {/* <Field as="select" name="country">
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+              </Field> */}
               <BaseInputPassword name="password" type="password" label="Password" />
               <BaseInput name="company" type="text" label="Company Name (Optional)" />
               <div className="terms-part">

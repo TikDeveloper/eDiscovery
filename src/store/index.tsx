@@ -1,6 +1,7 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import globalReducer from './slices/global.slice';
 import authReducer from './slices/auth.slice';
+import matterReducer from './slices/matter.slice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -23,7 +24,8 @@ const authReducerPersisted = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     global: globalReducer,
-    auth: authReducerPersisted
+    auth: authReducerPersisted,
+    matter: matterReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
