@@ -21,13 +21,15 @@ const BaseModal: FC<BaseModalProps> = ({ closeModal, children }) => {
         className="modal-overlay"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}>
+        exit={{ opacity: 0 }}
+      >
         <motion.div
           className="modal-container"
           ref={modalRef}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          exit={{ scale: 0 }}>
+          exit={{ scale: 0 }}
+        >
           <div className="modal-header">
             <BaseLogo />
             <button type="button" onClick={closeModal}>

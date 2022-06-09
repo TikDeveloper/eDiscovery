@@ -62,7 +62,8 @@ const AnimatedRoutes = () => {
               <PrivateRoute isAuth={isLoggedIn}>
                 <UserLayout />
               </PrivateRoute>
-            }>
+            }
+          >
             {/* <Route index element={<DashboardPage />} /> */}
           </Route>
           <Route path={'*'} element={<NotFoundPage />} />

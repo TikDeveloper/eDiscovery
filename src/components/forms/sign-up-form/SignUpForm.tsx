@@ -49,7 +49,8 @@ const SignUpForm: FC = () => {
         <Formik
           initialValues={INITIAL_VALUES_SIGN_UP}
           validationSchema={FORM_VALIDATION_SIGN_UP}
-          onSubmit={onSubmitFormRegistration}>
+          onSubmit={onSubmitFormRegistration}
+        >
           {({ dirty, isValid, isSubmitting }) => (
             <Form>
               <BaseInput
@@ -78,7 +79,8 @@ const SignUpForm: FC = () => {
                   mode="filled"
                   type="submit"
                   isSubmitting={isSubmitting}
-                  disabled={!(isValid && dirty) || isSubmitting}>
+                  disabled={!(isValid && dirty) || isSubmitting}
+                >
                   {isSubmitting ? <BaseSpinner /> : <BaseText> Lets get started </BaseText>}
                 </BaseButton>
               </div>

@@ -12,7 +12,8 @@ const FadeIn: FC<FadeInProps> = ({ children }) => {
       variants={fadeIn}
       initial="initial"
       animate="animate"
-      style={{ width: '100%', height: '100%' }}>
+      style={{ width: '100%', height: '100%' }}
+    >
       {children}
     </motion.div>
   );

@@ -62,7 +62,8 @@ const SignInForm: FC = () => {
         <Formik
           initialValues={INITIAL_VALUES_SIGN_IN}
           validationSchema={FORM_VALIDATION_SIGN_IN}
-          onSubmit={onSubmitFormLogin}>
+          onSubmit={onSubmitFormLogin}
+        >
           {({ dirty, isValid, isSubmitting }) => (
             <Form>
               <BaseInput name="email" type="text" label="Email address" />
@@ -79,7 +80,8 @@ const SignInForm: FC = () => {
                   mode="filled"
                   type="submit"
                   isSubmitting={isSubmitting}
-                  disabled={!(isValid && dirty) || isSubmitting}>
+                  disabled={!(isValid && dirty) || isSubmitting}
+                >
                   {isSubmitting ? <BaseSpinner /> : <BaseText> Log in </BaseText>}
                 </BaseButton>
               </div>
