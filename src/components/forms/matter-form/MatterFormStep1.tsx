@@ -20,7 +20,7 @@ const MatterFormStep1: FC = () => {
   ) => {
     console.log('values', values);
     console.log('helpers', helpers);
-    dispatch(fillMatterName(values));
+    await dispatch(fillMatterName(values));
   };
 
   return (

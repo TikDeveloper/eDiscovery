@@ -24,13 +24,7 @@ const SignInForm: FC = () => {
   const onSubmitFormLogin = useCallback(
     async (values: VALUES_SIGN_IN, actions: FormikHelpers<VALUES_SIGN_IN>) => {
       console.log(values);
-      await dispatch(
-        loginRequest({
-          email: values.email,
-          password: values.password,
-          rememberMe: values.rememberMe
-        })
-      );
+      await dispatch(loginRequest(values));
       actions.setSubmitting(false);
       actions.resetForm();
     },
