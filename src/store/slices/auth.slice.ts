@@ -58,16 +58,11 @@ const authSlice = createSlice({
   name: 'AuthSlice',
   initialState,
   reducers: {
-    fakeLogin(state) {
-      state.isLoggedIn = true;
+    logout(state) {
+      state.isLoggedIn = false;
+      state.token = undefined;
+      state.isStepsCompleted = false;
     }
-    // logout(state) {
-    //   state.isLoggedIn = false;
-    //   state.token = null;
-    //   state.data = null;
-    //   state.loading = false;
-    //   api.defaults.headers.Authorization = null;
-    // }
   },
   extraReducers: (builder) => {
     builder
@@ -105,6 +100,6 @@ const authSlice = createSlice({
   }
 });
 
-export const { fakeLogin } = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

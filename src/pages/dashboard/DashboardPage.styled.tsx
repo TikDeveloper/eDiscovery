@@ -1,3 +1,4 @@
+import BaseButton from 'components/common/BaseButton';
 import styled from 'styled-components';
 
 export const DashboardWrapper = styled.div`
@@ -18,4 +19,9 @@ export const DashBoardHeader = styled.div`
   > h1 {
     font-weight: 500;
   }
+`;
+
+export const TestBtn = styled(BaseButton)`
+  width: 250px;
+  margin: 48px;
 `;

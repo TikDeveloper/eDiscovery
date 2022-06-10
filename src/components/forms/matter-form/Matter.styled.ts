@@ -93,4 +93,26 @@ export const MatterFormActions = styled.div`
 
 export const Step1Wrapper = styled.div`
   padding: 48px;
+  > div {
+    margin-top: 0 !important;
+  }
+  > p {
+    margin: 24px 0;
+    &:last-child {
+      font-style: italic;
+    }
+  }
+`;
+
+export const Step2Wrapper = styled.div`
+  padding: 48px;
+  > div {
+    margin-top: 0 !important;
+  }
+  > p {
+    margin: 24px 0;
+    &:last-child {
+      font-style: italic;
+    }
+  }
 `;
