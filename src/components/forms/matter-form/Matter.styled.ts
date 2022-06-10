@@ -115,4 +115,35 @@ export const Step2Wrapper = styled.div`
       font-style: italic;
     }
   }
+
+  #upload-border {
+    height: 50px;
+    border: 1px solid #2077c9;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  #upload-name {
+    height: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    padding-left: 16px;
+    border: none;
+    background: none;
+  }
+
+  #upload-button {
+    height: 100%;
+    padding: 0 20px;
+    border: none;
+    background: #2077c9;
+    color: white;
+    cursor: pointer;
+  }
+
+  #upload-name:focus,
+  #upload-button:focus {
+    outline: none;
+  }
 `;

@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC, memo, useRef } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { Step2Wrapper } from './Matter.styled';
@@ -10,6 +10,7 @@ import BaseText from 'components/common/BaseText';
 const MatterFormStep2: FC = () => {
   const { files } = useAppSelector((state) => state.matter);
   const dispatch = useAppDispatch();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onSubmitDocuments = async (
     values: { files: File[] },
@@ -31,11 +32,11 @@ const MatterFormStep2: FC = () => {
         }}
         onSubmit={onSubmitDocuments}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             <Step2Wrapper>
               <BaseTitle>Upload Documents</BaseTitle>
-              <div>
+              {/* <div>
                 <input
                   name="files"
                   type="file"
@@ -43,6 +44,33 @@ const MatterFormStep2: FC = () => {
                   onChange={(event) => {
                     setFieldValue('files', event.currentTarget.files);
                   }}
+                />
+              </div> */}
+              <div id="upload-container">
+                <div id="upload-border">
+                  <input
+                    type="text"
+                    id="upload-name"
+                    disabled
+                    value={`${values.files.length ? `${values.files.length} items selected` : ''} `}
+                  />
+                  <button
+                    id="upload-button"
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    Add Files
+                  </button>
+                </div>
+                <input
+                  name="files"
+                  type="file"
+                  multiple
+                  onChange={(event) => {
+                    setFieldValue('files', event.currentTarget.files);
+                  }}
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
                 />
               </div>
 
