@@ -3,11 +3,12 @@ import styled, { css, keyframes } from 'styled-components';
 
 type BaseSpinnerProps = {
   forPage?: boolean;
+  forLayout?: boolean;
 };
 
-const BaseSpinner: FC<BaseSpinnerProps> = ({ forPage }) => {
+const BaseSpinner: FC<BaseSpinnerProps> = ({ forPage, forLayout }) => {
   return (
-    <SpinnerWrapper forPage={forPage}>
+    <SpinnerWrapper forPage={forPage} forLayout={forLayout}>
       <Spinner />
     </SpinnerWrapper>
   );
@@ -42,6 +43,23 @@ export const SpinnerWrapper = styled.div<BaseSpinnerProps>`
           border: 5px solid #f3f3f3;
           border-top: 5px solid ${({ theme }) => theme.colors.blue};
         }
+      `;
+    }
+    return;
+  }}
+  ${(props) => {
+    if (props.forLayout) {
+      return css`
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 900;
+        left: 0;
+        top: 0;
+        background-color: ${({ theme }) => theme.colors.blackPallet1};
+        display: flex;
+        justify-content: center;
+        align-items: center;
       `;
     }
     return;

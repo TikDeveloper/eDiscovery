@@ -1,4 +1,5 @@
 export type MatterState = {
   step: number;
-  loading: false;
+  loading: boolean;
+  matterName: string;
 };

@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { toast } from 'react-toastify';
 // import { api } from 'utils/axios';
 import { MatterState } from './matter.types';
 
 const initialState: MatterState = {
-  step: 1,
-  loading: false
+  step: 0,
+  loading: false,
+  matterName: ''
 };
 
 // // Login Request //
@@ -35,6 +36,9 @@ const matterSlice = createSlice({
     },
     prevStep(state) {
       state.step = state.step - 1;
+    },
+    fillMatterName(state, { payload }: PayloadAction<{ matterName: string }>) {
+      state.matterName = payload.matterName;
     }
   },
   extraReducers: (builder) => {
@@ -57,6 +61,6 @@ const matterSlice = createSlice({
   }
 });
 
-export const { nextStep, prevStep } = matterSlice.actions;
+export const { nextStep, prevStep, fillMatterName } = matterSlice.actions;
 
 export default matterSlice.reducer;

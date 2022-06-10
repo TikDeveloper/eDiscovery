@@ -69,3 +69,15 @@ export const FORM_VALIDATION_SIGN_UP = Yup.object({
   company: Yup.string(),
   terms: Yup.boolean().oneOf([true, null], 'Error')
 });
+
+// Matter Name Form //
+export type VALUES_MATTER_NAME = {
+  matterName: string;
+};
+
+export const FORM_VALIDATION_MATTER_NAME = Yup.object({
+  matterName: Yup.string()
+    .min(4, 'Min 4 char..!')
+    .max(20, 'Max 20 char..!')
+    .required('Required field..!')
+});

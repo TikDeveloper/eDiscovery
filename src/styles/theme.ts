@@ -38,7 +38,7 @@ export const theme = {
     white: '#FFFFFF',
 
     black: '#000000',
-    blackPallet1: 'rgba(0, 0, 0, 0.35)',
+    blackPallet1: 'rgba(0, 0, 0, 0.4)',
 
     gray: '#abaaaa',
     grayPallet1: '#f3f2ef',

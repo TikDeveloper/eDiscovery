@@ -28,6 +28,7 @@ export const MatterFormWrapper = styled.div`
 `;
 
 export const MatterFormContainer = styled.div`
+  position: relative;
   width: 100%;
   height: 70%;
   background-color: ${({ theme }) => theme.colors.white};
@@ -39,6 +40,10 @@ export const MatterFormContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  #RFS-StepperContainer {
+    background-color: ${({ theme }) => theme.colors.bluePallet4};
+    height: 116px;
   }
   .step-item {
     pointer-events: none;
@@ -58,10 +63,16 @@ export const MatterFormContainer = styled.div`
   }
 `;
 
-export const MatterTemplateWrapper = styled.div``;
-
-export const MatterFormTabs = styled.div`
-  background-color: ${({ theme }) => theme.colors.bluePallet4};
+export const MatterTemplateWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  > form {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 export const MatterFormActions = styled.div`
@@ -78,4 +89,8 @@ export const MatterFormActions = styled.div`
       margin-left: 48px;
     }
   }
+`;
+
+export const Step1Wrapper = styled.div`
+  padding: 48px;
 `;
