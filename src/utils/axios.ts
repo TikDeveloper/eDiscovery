@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://192.168.2.155:5000/api/',
+  baseURL: 'https://gurubook.evnnews.com',
   headers: {
     'Content-Type': 'application/json'
   }
